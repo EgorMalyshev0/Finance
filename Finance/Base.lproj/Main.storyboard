@@ -438,7 +438,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joX-zp-Nc7">
-                                <rect key="frame" x="40" y="142" width="334" height="50"/>
+                                <rect key="frame" x="40" y="372" width="334" height="50"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MYY-6x-Sas"/>
@@ -452,7 +452,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDz-OZ-8uL">
-                                <rect key="frame" x="40" y="212" width="334" height="50"/>
+                                <rect key="frame" x="40" y="442" width="334" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sML-OQ-odB">
                                         <rect key="frame" x="2" y="2" width="330" height="46"/>
@@ -476,7 +476,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="o2Y-fr-Dtv">
-                                <rect key="frame" x="20" y="30" width="374" height="82"/>
+                                <rect key="frame" x="20" y="30" width="374" height="312"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Наименование" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Uvu-4N-TW0">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="19"/>
@@ -502,6 +502,9 @@
                                             <constraint firstAttribute="height" constant="1" id="8Os-0D-nYD"/>
                                         </constraints>
                                     </view>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hGr-oa-uWI">
+                                        <rect key="frame" x="0.0" y="96" width="374" height="216"/>
+                                    </datePicker>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -524,6 +527,7 @@
                         <outlet property="addIncomeButton" destination="joX-zp-Nc7" id="pM0-U6-TVF"/>
                         <outlet property="cancelButton" destination="sML-OQ-odB" id="dgh-7f-6iF"/>
                         <outlet property="cancelView" destination="mDz-OZ-8uL" id="tqP-ZN-HQq"/>
+                        <outlet property="datePicker" destination="hGr-oa-uWI" id="M8R-6f-NQt"/>
                         <outlet property="nameTextfield" destination="Uvu-4N-TW0" id="j8l-5j-r6j"/>
                         <outlet property="newIncomeTextfield" destination="mMQ-UX-C8b" id="4nt-Be-gwL"/>
                         <outlet property="separatorView" destination="SOm-cP-cmf" id="GF0-OZ-VFy"/>
@@ -572,9 +576,12 @@
                                 <segments>
                                     <segment title="неделя"/>
                                     <segment title="месяц"/>
-                                    <segment title="год"/>
+                                    <segment title="квартал"/>
                                     <segment title="все время"/>
                                 </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="JFD-2f-sQA" eventType="valueChanged" id="m4n-48-wUz"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -589,6 +596,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="График" image="chart.bar" catalog="system" id="T5Z-k4-Nen"/>
                     <navigationItem key="navigationItem" id="FP6-AL-0W1"/>
+                    <connections>
+                        <outlet property="chartSegmentedControl" destination="dY3-rD-Fru" id="fgJ-5w-Pq3"/>
+                        <outlet property="chartView" destination="a5p-1t-Llz" id="GIG-AG-pHn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hT7-Bg-pYE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

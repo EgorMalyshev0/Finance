@@ -20,6 +20,7 @@
 		70BFB8D7249F6DD000ED24A2 /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */; };
 		70BFB8DD24A7D50500ED24A2 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */; };
 		70BFB91F24AA6DC900ED24A2 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */; };
+		70BFB92124AE5FB500ED24A2 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB92024AE5FB500ED24A2 /* Chart.swift */; };
 		F7DBEA4EC608F868A9752B4A /* Pods_Finance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262A2B587F2A96FA2FF44F9 /* Pods_Finance.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		70BFB92024AE5FB500ED24A2 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		8262A2B587F2A96FA2FF44F9 /* Pods_Finance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Finance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF29B8561B8B302CE0FB58A /* Pods-Finance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finance.release.xcconfig"; path = "Target Support Files/Pods-Finance/Pods-Finance.release.xcconfig"; sourceTree = "<group>"; };
 		FF79D0A5AA0F6F7E7E9607AF /* Pods-Finance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finance.debug.xcconfig"; path = "Target Support Files/Pods-Finance/Pods-Finance.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,14 +82,15 @@
 				70BFB8B8249EA43800ED24A2 /* AppDelegate.swift */,
 				70BFB8BA249EA43800ED24A2 /* SceneDelegate.swift */,
 				70BFB8BE249EA43800ED24A2 /* Main.storyboard */,
-				70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */,
-				70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */,
-				70BFB8D4249F621800ED24A2 /* Persistance.swift */,
+				70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */,
+				70BFB8D2249F594500ED24A2 /* IncomesTableViewCell.swift */,
 				70BFB8CC249EA58500ED24A2 /* ExpensesViewController.swift */,
 				70BFB8CE249EABBD00ED24A2 /* ExpencesTableViewCell.swift */,
-				70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */,
+				70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */,
 				70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */,
-				70BFB8D2249F594500ED24A2 /* IncomesTableViewCell.swift */,
+				70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */,
+				70BFB92024AE5FB500ED24A2 /* Chart.swift */,
+				70BFB8D4249F621800ED24A2 /* Persistance.swift */,
 				70BFB8C1249EA43D00ED24A2 /* Assets.xcassets */,
 				70BFB8C3249EA43D00ED24A2 /* LaunchScreen.storyboard */,
 				70BFB8C6249EA43D00ED24A2 /* Info.plist */,
@@ -230,6 +233,7 @@
 				70BFB8D5249F621800ED24A2 /* Persistance.swift in Sources */,
 				70BFB91F24AA6DC900ED24A2 /* ChartsViewController.swift in Sources */,
 				70BFB8D1249F588800ED24A2 /* IncomesViewController.swift in Sources */,
+				70BFB92124AE5FB500ED24A2 /* Chart.swift in Sources */,
 				70BFB8DD24A7D50500ED24A2 /* TransactionsViewController.swift in Sources */,
 				70BFB8CF249EABBD00ED24A2 /* ExpencesTableViewCell.swift in Sources */,
 				70BFB8D7249F6DD000ED24A2 /* AddIncomeViewController.swift in Sources */,

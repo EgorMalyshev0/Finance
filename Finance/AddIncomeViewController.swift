@@ -1,7 +1,7 @@
 import UIKit
 
 protocol IncomeDelegate {
-    func addNewIncome(_ income: Double?,_ name: String?)
+    func addNewIncome(_ income: Double?,_ name: String?,_ date: Date?)
 }
 
 enum SegueType {
@@ -19,6 +19,7 @@ class AddIncomeViewController: UIViewController {
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var newIncomeTextfield: UITextField!
     @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var addIncomeButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cancelView: UIView!
@@ -35,6 +36,7 @@ class AddIncomeViewController: UIViewController {
         case .addExpenseCategory:
             newIncomeTextfield.isHidden = true
             separatorView.isHidden = true
+            datePicker.isHidden = true
             addIncomeButton.setTitle("Добавить категорию расходов", for: .normal)
         case .addExpense:
             addIncomeButton.setTitle("Добавить расход", for: .normal)
@@ -50,19 +52,19 @@ class AddIncomeViewController: UIViewController {
             case .addIncome:
                 if let text = newIncomeTextfield.text {
                     if let double = Double(text){
-                        delegate?.addNewIncome(double, nil)
+                        delegate?.addNewIncome(double, nil, datePicker.date)
                         dismiss(animated: true, completion: nil)
                     }
                 }
             case .addExpenseCategory:
                 if let text = nameTextfield.text {
-                    delegate?.addNewIncome(nil, text)
+                    delegate?.addNewIncome(nil, text, nil)
                     dismiss(animated: true, completion: nil)
                 }
             case .addExpense:
                 if let text = newIncomeTextfield.text, let text2 = nameTextfield.text {
                     if let double = Double(text){
-                        delegate?.addNewIncome(double, text2)
+                        delegate?.addNewIncome(double, text2, datePicker.date)
                         dismiss(animated: true, completion: nil)
                     }
                 }

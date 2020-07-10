@@ -11,10 +11,15 @@ class Transaction: Object {
     
     @objc dynamic var type: String = ""
     @objc dynamic var cost: Double = 0
-    @objc dynamic var date: String = ""
+    @objc dynamic var date: Date = Date()
+    @objc dynamic var dateString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter.string(from: self.date)
+    }
     @objc dynamic var category: String?
     @objc dynamic var name: String?
-    convenience init(type: TransactionType, cost: Double, date: String, category: String?, name: String?) {
+    convenience init(type: TransactionType, cost: Double, date: Date, category: String?, name: String?) {
         self.init()
         self.type = type.rawValue
         self.cost = cost
@@ -55,7 +60,16 @@ class Persistance {
             realm.add(object)
         }
     }
-    
+    func deleteObject<T: Object>(object: T){
+        try! realm.write {
+            realm.delete(object)
+        }
+    }
+//    func deleteSomeTransactions(category: String){
+//        try! realm.write {
+//            realm.delete(objects)
+//        }
+//    }
     func getTransactions(_ type: TransactionType, category: String?) -> [Transaction]{
         let objects = realm.objects(Transaction.self)
             .filter("type == '\(type.rawValue)'")

@@ -37,22 +37,28 @@ extension IncomesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomes") as! IncomesTableViewCell
         cell.countLabel.text = "\(incomes[indexPath.row].cost) ₽"
-        cell.dateLabel.text = incomes[indexPath.row].date
+        cell.dateLabel.text = incomes[indexPath.row].dateString
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         incomesTableView.deselectRow(at: indexPath, animated: true)
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let income = incomes[indexPath.row]
+            Persistance.shared.currentBalance -= income.cost
+            incomes.remove(at: indexPath.row)
+            Persistance.shared.deleteObject(object: income)
+            incomesTableView.deleteRows(at: [indexPath], with: .fade)
+            currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+        }
+    }
 }
 
 extension IncomesViewController: IncomeDelegate{
-    func addNewIncome(_ income: Double?, _ name: String?) {
-        if let income = income {
-            let currentDate = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
-            let dateString = formatter.string(from: currentDate)
-            let newIncome = Transaction(type: TransactionType.Income, cost: income, date: dateString, category: nil, name: nil)
+    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
+        if let income = income, let date = date {
+            let newIncome = Transaction(type: TransactionType.Income, cost: income, date: date, category: nil, name: nil)
             incomes.append(newIncome)
             Persistance.shared.addObject(object: newIncome)
             incomesTableView.reloadData()

@@ -14,7 +14,6 @@ class ExpensesViewController: UIViewController {
         if !appDelegate.hasAlreadyLaunched {
             appDelegate.sethasAlreadyLaunched()
             addFirstCategories()
-            print("This is first start")
         }
         addexpensesCategoryButton.layer.cornerRadius = addexpensesCategoryButton.frame.size.height / 2
         currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
@@ -67,11 +66,31 @@ extension ExpensesViewController: UITableViewDataSource, UITableViewDelegate {
         expensesTableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showExpensesFromCategory", sender: tableView.cellForRow(at: indexPath))
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: "Удалить категорию?", message: "Вы уверены, что хотите удалить категорию? Все транзакции удалятся.", preferredStyle: .alert)
+            let yes = UIAlertAction(title: "Да", style: .default) { (action) in
+                let category = self.expensesCategories[indexPath.row]
+                self.expensesCategories.remove(at: indexPath.row)
+                let transactionsToDelete = Persistance.shared.getTransactions(.Expense, category: category.category)
+                for t in transactionsToDelete{
+                    Persistance.shared.currentBalance += t.cost
+                    Persistance.shared.deleteObject(object: t)
+                }
+                Persistance.shared.deleteObject(object: category)
+                self.currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+                self.expensesTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            let no = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
+            alert.addAction(yes)
+            alert.addAction(no)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension ExpensesViewController: IncomeDelegate{
-    func addNewIncome(_ income: Double?, _ name: String?) {
+    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
         if let category = name {
             let newCategory = Category(category)
             expensesCategories.append(newCategory)

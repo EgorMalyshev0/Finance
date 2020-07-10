@@ -18,12 +18,14 @@ class TransactionsViewController: UIViewController {
     }
     
     @IBAction func showExpensesChart(_ sender: Any) {
-//        performSegue(withIdentifier: "showExpensesChart", sender: Any?.self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AddIncomeViewController, segue.identifier == "addExpense" {
             vc.delegate = self
             vc.segueType = .addExpense
+        } else if let vc = segue.destination as? ChartsViewController, segue.identifier == "showExpensesChart" {
+            vc.fromTransactions = true
+            vc.allExpenseTransactions = transactions
         }
     }
 
@@ -37,24 +39,28 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomes") as! IncomesTableViewCell
         cell.nameLabel.text = transactions[indexPath.row].name
-        cell.dateLabel.text = transactions[indexPath.row].date
+        cell.dateLabel.text = transactions[indexPath.row].dateString
         cell.countLabel.text = "\(transactions[indexPath.row].cost) ₽"
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         transactionsTableview.deselectRow(at: indexPath, animated: true)
     }
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let transaction = transactions[indexPath.row]
+            Persistance.shared.currentBalance += transaction.cost
+            transactions.remove(at: indexPath.row)
+            Persistance.shared.deleteObject(object: transaction)
+            transactionsTableview.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 
 extension TransactionsViewController: IncomeDelegate {
-    func addNewIncome(_ income: Double?, _ name: String?) {
-        if let name = name, let income = income {
-            let currentDate = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
-            let dateString = formatter.string(from: currentDate)
-            let newExpense = Transaction(type: .Expense, cost: income, date: dateString, category: self.name, name: name)
+    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
+        if let name = name, let income = income, let date = date {
+            let newExpense = Transaction(type: .Expense, cost: income, date: date, category: self.name, name: name)
             transactions.append(newExpense)
             Persistance.shared.addObject(object: newExpense)
             transactionsTableview.reloadData()

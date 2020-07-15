@@ -20,7 +20,7 @@ class TransactionsViewController: UIViewController {
     @IBAction func showExpensesChart(_ sender: Any) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? AddIncomeViewController, segue.identifier == "addExpense" {
+        if let vc = segue.destination as? AddingViewController, segue.identifier == "addExpense" {
             vc.delegate = self
             vc.segueType = .addExpense
         } else if let vc = segue.destination as? ChartsViewController, segue.identifier == "showExpensesChart" {
@@ -57,8 +57,8 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-extension TransactionsViewController: IncomeDelegate {
-    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
+extension TransactionsViewController: AddNewItemDelegate {
+    func addNewItem(_ income: Double?, _ name: String?,_ date: Date?) {
         if let name = name, let income = income, let date = date {
             let newExpense = Transaction(type: .Expense, cost: income, date: date, category: self.name, name: name)
             transactions.append(newExpense)

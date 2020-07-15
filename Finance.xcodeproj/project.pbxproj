@@ -17,7 +17,7 @@
 		70BFB8D1249F588800ED24A2 /* IncomesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */; };
 		70BFB8D3249F594500ED24A2 /* IncomesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D2249F594500ED24A2 /* IncomesTableViewCell.swift */; };
 		70BFB8D5249F621800ED24A2 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D4249F621800ED24A2 /* Persistance.swift */; };
-		70BFB8D7249F6DD000ED24A2 /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */; };
+		70BFB8D7249F6DD000ED24A2 /* AddingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8D6249F6DD000ED24A2 /* AddingViewController.swift */; };
 		70BFB8DD24A7D50500ED24A2 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */; };
 		70BFB91F24AA6DC900ED24A2 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */; };
 		70BFB92124AE5FB500ED24A2 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BFB92024AE5FB500ED24A2 /* Chart.swift */; };
@@ -37,7 +37,7 @@
 		70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesViewController.swift; sourceTree = "<group>"; };
 		70BFB8D2249F594500ED24A2 /* IncomesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesTableViewCell.swift; sourceTree = "<group>"; };
 		70BFB8D4249F621800ED24A2 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
-		70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
+		70BFB8D6249F6DD000ED24A2 /* AddingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingViewController.swift; sourceTree = "<group>"; };
 		70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
 		70BFB92024AE5FB500ED24A2 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 				70BFB8CC249EA58500ED24A2 /* ExpensesViewController.swift */,
 				70BFB8CE249EABBD00ED24A2 /* ExpencesTableViewCell.swift */,
 				70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */,
-				70BFB8D6249F6DD000ED24A2 /* AddIncomeViewController.swift */,
+				70BFB8D6249F6DD000ED24A2 /* AddingViewController.swift */,
 				70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */,
 				70BFB92024AE5FB500ED24A2 /* Chart.swift */,
 				70BFB8D4249F621800ED24A2 /* Persistance.swift */,
@@ -236,7 +236,7 @@
 				70BFB92124AE5FB500ED24A2 /* Chart.swift in Sources */,
 				70BFB8DD24A7D50500ED24A2 /* TransactionsViewController.swift in Sources */,
 				70BFB8CF249EABBD00ED24A2 /* ExpencesTableViewCell.swift in Sources */,
-				70BFB8D7249F6DD000ED24A2 /* AddIncomeViewController.swift in Sources */,
+				70BFB8D7249F6DD000ED24A2 /* AddingViewController.swift in Sources */,
 				70BFB8B9249EA43800ED24A2 /* AppDelegate.swift in Sources */,
 				70BFB8BB249EA43800ED24A2 /* SceneDelegate.swift in Sources */,
 				70BFB8D3249F594500ED24A2 /* IncomesTableViewCell.swift in Sources */,

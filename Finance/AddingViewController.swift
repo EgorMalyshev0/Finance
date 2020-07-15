@@ -1,7 +1,7 @@
 import UIKit
 
-protocol IncomeDelegate {
-    func addNewIncome(_ income: Double?,_ name: String?,_ date: Date?)
+protocol AddNewItemDelegate {
+    func addNewItem(_ income: Double?,_ name: String?,_ date: Date?)
 }
 
 enum SegueType {
@@ -10,9 +10,9 @@ enum SegueType {
     case addExpense
 }
 
-class AddIncomeViewController: UIViewController {
+class AddingViewController: UIViewController {
     
-    var delegate: IncomeDelegate?
+    var delegate: AddNewItemDelegate?
     
     var segueType: SegueType = .addIncome
 
@@ -44,6 +44,10 @@ class AddIncomeViewController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -52,26 +56,23 @@ class AddIncomeViewController: UIViewController {
             case .addIncome:
                 if let text = newIncomeTextfield.text {
                     if let double = Double(text){
-                        delegate?.addNewIncome(double, nil, datePicker.date)
+                        delegate?.addNewItem(double, nil, datePicker.date)
                         dismiss(animated: true, completion: nil)
                     }
                 }
             case .addExpenseCategory:
                 if let text = nameTextfield.text {
-                    delegate?.addNewIncome(nil, text, nil)
+                    delegate?.addNewItem(nil, text, nil)
                     dismiss(animated: true, completion: nil)
                 }
             case .addExpense:
                 if let text = newIncomeTextfield.text, let text2 = nameTextfield.text {
                     if let double = Double(text){
-                        delegate?.addNewIncome(double, text2, datePicker.date)
+                        delegate?.addNewItem(double, text2, datePicker.date)
                         dismiss(animated: true, completion: nil)
                     }
                 }
             }
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true, completion: nil)
-    }
 }

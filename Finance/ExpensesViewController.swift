@@ -41,7 +41,7 @@ class ExpensesViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? AddIncomeViewController, segue.identifier == "addExpenseCategory" {
+        if let vc = segue.destination as? AddingViewController, segue.identifier == "addExpenseCategory" {
             vc.delegate = self
             vc.segueType = .addExpenseCategory
         } else if let cell = sender as? UITableViewCell, let index = expensesTableView.indexPath(for: cell), let vc = segue.destination as? TransactionsViewController, segue.identifier == "showExpensesFromCategory" {
@@ -89,8 +89,8 @@ extension ExpensesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension ExpensesViewController: IncomeDelegate{
-    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
+extension ExpensesViewController: AddNewItemDelegate{
+    func addNewItem(_ income: Double?, _ name: String?,_ date: Date?) {
         if let category = name {
             let newCategory = Category(category)
             expensesCategories.append(newCategory)

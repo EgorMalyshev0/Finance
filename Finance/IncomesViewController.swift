@@ -19,7 +19,7 @@ class IncomesViewController: UIViewController {
         currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? AddIncomeViewController, segue.identifier == "addIncome" {
+        if let vc = segue.destination as? AddingViewController, segue.identifier == "addIncome" {
             vc.delegate = self
             vc.segueType = .addIncome
         }
@@ -55,8 +55,8 @@ extension IncomesViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension IncomesViewController: IncomeDelegate{
-    func addNewIncome(_ income: Double?, _ name: String?,_ date: Date?) {
+extension IncomesViewController: AddNewItemDelegate{
+    func addNewItem(_ income: Double?, _ name: String?,_ date: Date?) {
         if let income = income, let date = date {
             let newIncome = Transaction(type: TransactionType.Income, cost: income, date: date, category: nil, name: nil)
             incomes.append(newIncome)

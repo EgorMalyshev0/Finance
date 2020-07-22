@@ -100,9 +100,18 @@ class Chart {
             data.setDrawValues(false)
             lineChartView.data = data
         }
-        
     }
     
+    func showChart(fromTransactions: Bool, category: String, period: Period){
+        if fromTransactions {
+            let expenses = Persistance.shared.getTransactions(.Expense, category: category)
+            setData(expenseValues: expenses, incomeValues: nil, period: period)
+        } else {
+            let expenses = Persistance.shared.getTransactions(.Expense, category: nil)
+            let incomes = Persistance.shared.getTransactions(.Income, category: nil)
+            setData(expenseValues: expenses, incomeValues: incomes, period: period)
+        }
+    }
 }
 
 extension Date {

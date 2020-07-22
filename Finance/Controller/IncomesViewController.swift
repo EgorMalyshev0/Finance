@@ -11,38 +11,44 @@ class IncomesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addIncomeButton.layer.cornerRadius = addIncomeButton.frame.size.height / 2
-        currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+        Persistance.shared.updateBalance(label: currentBalanceLabel)
         incomes = Persistance.shared.getTransactions(.Income, category: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+        Persistance.shared.updateBalance(label: currentBalanceLabel)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AddingViewController, segue.identifier == "addIncome" {
             vc.delegate = self
             vc.segueType = .addIncome
         }
     }
-    @IBAction func addIncome(_ sender: Any) {
-        performSegue(withIdentifier: "addIncome", sender: UIButton.self)
-    }
     
+    @IBAction func addIncome(_ sender: Any) {
+        performSegue(withIdentifier: "addIncome", sender: sender)
+    }
 }
 
+
 extension IncomesViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         incomes.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomes") as! IncomesTableViewCell
         cell.countLabel.text = "\(incomes[indexPath.row].cost) ₽"
         cell.dateLabel.text = incomes[indexPath.row].dateString
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         incomesTableView.deselectRow(at: indexPath, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let income = incomes[indexPath.row]
@@ -50,7 +56,7 @@ extension IncomesViewController: UITableViewDelegate, UITableViewDataSource {
             incomes.remove(at: indexPath.row)
             Persistance.shared.deleteObject(object: income)
             incomesTableView.deleteRows(at: [indexPath], with: .fade)
-            currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+            Persistance.shared.updateBalance(label: currentBalanceLabel)
         }
     }
 }
@@ -63,7 +69,7 @@ extension IncomesViewController: AddNewItemDelegate{
             Persistance.shared.addObject(object: newIncome)
             incomesTableView.reloadData()
             Persistance.shared.currentBalance += income
-            currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+            Persistance.shared.updateBalance(label: currentBalanceLabel)
         }
     }
 }

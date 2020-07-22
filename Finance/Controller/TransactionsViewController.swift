@@ -17,15 +17,13 @@ class TransactionsViewController: UIViewController {
         transactions = Persistance.shared.getTransactions(.Expense, category: name)
     }
     
-    @IBAction func showExpensesChart(_ sender: Any) {
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AddingViewController, segue.identifier == "addExpense" {
             vc.delegate = self
             vc.segueType = .addExpense
         } else if let vc = segue.destination as? ChartsViewController, segue.identifier == "showExpensesChart" {
             vc.fromTransactions = true
-            vc.allExpenseTransactions = transactions
+            vc.category = name
         }
     }
 

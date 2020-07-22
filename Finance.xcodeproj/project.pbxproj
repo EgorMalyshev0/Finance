@@ -58,6 +58,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		704922DA24C78620000162C4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */,
+				70BFB8CC249EA58500ED24A2 /* ExpensesViewController.swift */,
+				70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */,
+				70BFB8D6249F6DD000ED24A2 /* AddingViewController.swift */,
+				70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		704922DB24C78631000162C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				70BFB92024AE5FB500ED24A2 /* Chart.swift */,
+				70BFB8D4249F621800ED24A2 /* Persistance.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		70BFB8AC249EA43800ED24A2 = {
 			isa = PBXGroup;
 			children = (
@@ -82,15 +103,10 @@
 				70BFB8B8249EA43800ED24A2 /* AppDelegate.swift */,
 				70BFB8BA249EA43800ED24A2 /* SceneDelegate.swift */,
 				70BFB8BE249EA43800ED24A2 /* Main.storyboard */,
-				70BFB8D0249F588800ED24A2 /* IncomesViewController.swift */,
 				70BFB8D2249F594500ED24A2 /* IncomesTableViewCell.swift */,
-				70BFB8CC249EA58500ED24A2 /* ExpensesViewController.swift */,
 				70BFB8CE249EABBD00ED24A2 /* ExpencesTableViewCell.swift */,
-				70BFB8DC24A7D50500ED24A2 /* TransactionsViewController.swift */,
-				70BFB8D6249F6DD000ED24A2 /* AddingViewController.swift */,
-				70BFB91E24AA6DC900ED24A2 /* ChartsViewController.swift */,
-				70BFB92024AE5FB500ED24A2 /* Chart.swift */,
-				70BFB8D4249F621800ED24A2 /* Persistance.swift */,
+				704922DA24C78620000162C4 /* Controller */,
+				704922DB24C78631000162C4 /* Model */,
 				70BFB8C1249EA43D00ED24A2 /* Assets.xcassets */,
 				70BFB8C3249EA43D00ED24A2 /* LaunchScreen.storyboard */,
 				70BFB8C6249EA43D00ED24A2 /* Info.plist */,

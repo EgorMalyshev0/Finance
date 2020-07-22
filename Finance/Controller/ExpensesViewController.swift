@@ -16,13 +16,15 @@ class ExpensesViewController: UIViewController {
             addFirstCategories()
         }
         addexpensesCategoryButton.layer.cornerRadius = addexpensesCategoryButton.frame.size.height / 2
-        currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+        Persistance.shared.updateBalance(label: currentBalanceLabel)
         expensesCategories = Persistance.shared.getCategories()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+        Persistance.shared.updateBalance(label: currentBalanceLabel)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -37,7 +39,7 @@ class ExpensesViewController: UIViewController {
     }
     
     @IBAction func addExpenseCategory(_ sender: Any) {
-        performSegue(withIdentifier: "addExpenseCategory", sender: Any?.self)
+        performSegue(withIdentifier: "addExpenseCategory", sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,8 +50,8 @@ class ExpensesViewController: UIViewController {
             vc.name = expensesCategories[index.row].category
         }
     }
-    
 }
+
 
 extension ExpensesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,19 +68,15 @@ extension ExpensesViewController: UITableViewDataSource, UITableViewDelegate {
         expensesTableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showExpensesFromCategory", sender: tableView.cellForRow(at: indexPath))
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Удалить категорию?", message: "Вы уверены, что хотите удалить категорию? Все транзакции удалятся.", preferredStyle: .alert)
-            let yes = UIAlertAction(title: "Да", style: .default) { (action) in
+            let yes = UIAlertAction(title: "Да", style: .default) {[unowned self] (action) in
                 let category = self.expensesCategories[indexPath.row]
                 self.expensesCategories.remove(at: indexPath.row)
-                let transactionsToDelete = Persistance.shared.getTransactions(.Expense, category: category.category)
-                for t in transactionsToDelete{
-                    Persistance.shared.currentBalance += t.cost
-                    Persistance.shared.deleteObject(object: t)
-                }
-                Persistance.shared.deleteObject(object: category)
-                self.currentBalanceLabel.text = "\(Persistance.shared.currentBalance) ₽"
+                Persistance.shared.deletingCategory(category)
+                Persistance.shared.updateBalance(label: self.currentBalanceLabel)
                 self.expensesTableView.deleteRows(at: [indexPath], with: .fade)
             }
             let no = UIAlertAction(title: "Нет", style: .destructive, handler: nil)

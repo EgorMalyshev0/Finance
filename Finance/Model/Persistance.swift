@@ -60,16 +60,13 @@ class Persistance {
             realm.add(object)
         }
     }
+    
     func deleteObject<T: Object>(object: T){
         try! realm.write {
             realm.delete(object)
         }
     }
-//    func deleteSomeTransactions(category: String){
-//        try! realm.write {
-//            realm.delete(objects)
-//        }
-//    }
+
     func getTransactions(_ type: TransactionType, category: String?) -> [Transaction]{
         let objects = realm.objects(Transaction.self)
             .filter("type == '\(type.rawValue)'")
@@ -79,9 +76,22 @@ class Persistance {
         }
         return Array(objects)
     }
+    
     func getCategories() -> [Category]{
         let objects = realm.objects(Category.self)
         return Array(objects)
     }
     
+    func updateBalance(label: UILabel) {
+        label.text = "\(Persistance.shared.currentBalance) ₽"
+    }
+    
+    func deletingCategory(_ category: Category){
+        let transactionsToDelete = Persistance.shared.getTransactions(.Expense, category: category.category)
+        for t in transactionsToDelete{
+            Persistance.shared.currentBalance += t.cost
+            Persistance.shared.deleteObject(object: t)
+        }
+        Persistance.shared.deleteObject(object: category)
+    }
 }
